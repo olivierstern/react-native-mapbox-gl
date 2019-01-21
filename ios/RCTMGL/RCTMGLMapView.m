@@ -248,8 +248,9 @@ static double const M2PI = M_PI * 2;
     return writeToDisk ? [RNMBImageUtils createTempFile:snapshot] : [RNMBImageUtils createBase64:snapshot];
 }
 
-- (CLLocationDistance)getMetersPerPixelAtLatitude:(double)latitude withZoom:(double)zoomLevel
+- (CLLocationDistance)getMetersPerPixelAtLatitude:(double)zoomLevel
 {
+    latitude = 43.305506110301195;
     double constrainedZoom = [[RCTMGLUtils clamp:[NSNumber numberWithDouble:zoomLevel]
                                              min:[NSNumber numberWithDouble:self.minimumZoomLevel]
                                              max:[NSNumber numberWithDouble:self.maximumZoomLevel]] doubleValue];
@@ -264,7 +265,7 @@ static double const M2PI = M_PI * 2;
 
 - (CLLocationDistance)altitudeFromZoom:(double)zoomLevel
 {
-    CLLocationDistance metersPerPixel = [self getMetersPerPixelAtLatitude:self.camera.centerCoordinate.latitude withZoom:zoomLevel];
+    CLLocationDistance metersPerPixel = [self getMetersPerPixelAtLatitude:zoomLevel];
     CLLocationDistance metersTall = metersPerPixel * self.frame.size.height;
     CLLocationDistance altitude = metersTall / 2 / tan(MGLRadiansFromDegrees(30) / 2.0);
     return altitude * sin(M_PI_2 - MGLRadiansFromDegrees(self.camera.pitch)) / sin(M_PI_2);

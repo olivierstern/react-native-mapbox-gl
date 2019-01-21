@@ -89,14 +89,15 @@
     if (_cameraStop.heading != nil) {
         nextCamera.heading = [_cameraStop.heading floatValue];
     }
+
+    if ([self _isCoordValid:_cameraStop.coordinate]) {
+        nextCamera.centerCoordinate = _cameraStop.coordinate;
+    }
     
     if (_cameraStop.zoom != nil) {
         nextCamera.altitude = [mapView altitudeFromZoom:[_cameraStop.zoom doubleValue]];
     }
     
-    if ([self _isCoordValid:_cameraStop.coordinate]) {
-        nextCamera.centerCoordinate = _cameraStop.coordinate;
-    }
     
     return nextCamera;
 }
