@@ -250,7 +250,7 @@ static double const M2PI = M_PI * 2;
 
 - (CLLocationDistance)getMetersPerPixelAtLatitude:(double)zoomLevel
 {
-    latitude = 43.305506110301195;
+    double latitude = 43.305506110301195;
     double constrainedZoom = [[RCTMGLUtils clamp:[NSNumber numberWithDouble:zoomLevel]
                                              min:[NSNumber numberWithDouble:self.minimumZoomLevel]
                                              max:[NSNumber numberWithDouble:self.maximumZoomLevel]] doubleValue];
