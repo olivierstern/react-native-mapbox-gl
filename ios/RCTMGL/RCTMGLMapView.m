@@ -250,14 +250,16 @@ static double const M2PI = M_PI * 2;
 
 - (CLLocationDistance)getMetersPerPixelAtLatitude:(double)latitude withZoom:(double)zoomLevel
 {
-    double constrainedZoom = [[RCTMGLUtils clamp:[NSNumber numberWithDouble:zoomLevel]
-                                             min:[NSNumber numberWithDouble:self.minimumZoomLevel]
-                                             max:[NSNumber numberWithDouble:self.maximumZoomLevel]] doubleValue];
+    // double constrainedZoom = [[RCTMGLUtils clamp:[NSNumber numberWithDouble:zoomLevel]
+    //                                          min:[NSNumber numberWithDouble:self.minimumZoomLevel]
+    //                                          max:[NSNumber numberWithDouble:self.maximumZoomLevel]] doubleValue];
     
-    double constrainedLatitude = [[RCTMGLUtils clamp:[NSNumber numberWithDouble:latitude]
-                                                 min:[NSNumber numberWithDouble:-LAT_MAX]
-                                                 max:[NSNumber numberWithDouble:LAT_MAX]] doubleValue];
+    // double constrainedLatitude = [[RCTMGLUtils clamp:[NSNumber numberWithDouble:latitude]
+    //                                              min:[NSNumber numberWithDouble:-LAT_MAX]
+    //                                              max:[NSNumber numberWithDouble:LAT_MAX]] doubleValue];
     
+    double constrainedZoom = zoomLevel;
+    double constrainedLatitude = latitude; 
     double constrainedScale = pow(2.0, constrainedZoom);
     return cos(constrainedLatitude * DEG2RAD) * M2PI * EARTH_RADIUS_M / (constrainedScale * TILE_SIZE);
 }
